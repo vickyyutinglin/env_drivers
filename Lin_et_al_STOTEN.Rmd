@@ -615,8 +615,8 @@ taiwan_map <- fortify(taiwan)  # change .shp file into dataframe
 ggplot() +
   geom_hline(yintercept = 23.5,linetype=5,col='black',alpha=.3)+
   geom_polygon(data= taiwan_map, aes(x= long, y= lat, group= group), color = "black", fill = 'antiquewhite') +
-  geom_point(data= coord.df, aes(x = longitude, y = latitude), size = 1.5,col='red')+
-  geom_text_repel(data= coord.df, aes(x = longitude, y = latitude,label=ID),max.overlaps=Inf,
+  geom_point(data= coord.df, aes(x = Longitude, y = Latitude), size = 1.5,col='red')+
+  geom_text_repel(data= coord.df, aes(x = Longitude, y = Latitude,label=Label1),max.overlaps=Inf,
                   min.segment.length = 0)+
   scale_x_continuous(limits = c(116.2, 123)) +                                                          
   scale_y_continuous(limits = c(20.5, 25.5)) +
@@ -634,7 +634,7 @@ ggplot(coord.df, aes(x = 1, y= site)) +   # plot distribution of BCs
   geom_hline(yintercept = 40.5,linetype=5,col='black',alpha=.8)+
   scale_fill_manual(values = col)+
   scale_x_continuous("",expand = c(0,0),breaks = 1:5,labels = c("5","10","15","20","40"))+
-  scale_y_continuous("",expand = c(0,0),breaks = 1:65,labels = unique(coord.df$lab)[-2])+
+  scale_y_continuous("",expand = c(0,0),breaks = 1:65,labels = unique(coord.df$Label2)[-2])+
   coord_fixed(ratio = 0.8)+ 
   labs(x = 'Depth (m)')
 ```

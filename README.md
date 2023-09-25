@@ -104,16 +104,48 @@ A detailed description of data acquisition and processing can be found in the pu
 
 4. Variable List
 
-    + Column A - ac_erect_single
-    + Column B - Site: survey sites
-    + Column C - Code: abbreviation for each site
-    + Column D – Lattitude
-    + Column E – Longitude
-    + Column F – Area: Northern coast and outlying islands
-    
+    + Column A - transect
+    + Column B - ac_erect_single
+    + Column C - ag_articulated_calcareous
+    + Column D - ag_corticated_foliose
+    + Column E – ag_corticated_macrophyte
+    + Column F – cca_crustose
+    + Column G – cy_filamentous
+    + Column H – hc_arborescent
+    + Column I – hc_bushy
+    + Column J – hc_column
+    + Column K – hc_encrusting
+    + Column L – hc_foliose
+    + Column M – hc_massive
+    + Column N – hc_table
+    + Column O – oc_arborescent
+    + Column P – oc_bushy
+    + Column Q – oc_cluster
+    + Column R – oc_digitate
+    + Column S – oc_encrusting
+    + Column T – oc_lobate
+    + Column U – oc_massive
+    + Column V – sg
+    + Column W – sp_encrusting
+    + Column X – sp_massive
+    + Column Y – sp_repent
+    + Column Z – turf_filamentous
+    + Column AA – zo_encrusting
+    + Column AB – zo_massive
+
 
 5. Abbreviations used
   
-    + for Area: 
-      + C: Coastal sites along the northern coast
-      + I: Outlying islands
+    + for major benthic categories: 
+      + ac: ascidian
+      + ag: alga
+      + cca: crustose coralline alga
+      + cy: cyanobacteria
+      + hc: hard coral
+      + oc: octocoral
+      + sg: sea grass
+      + sp: sponge
+      + turf:turf alga
+      + zo: zoanthid
+
+
