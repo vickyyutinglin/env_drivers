@@ -57,19 +57,22 @@ coord.df <- read.csv('Data/Linetal_dataset_Cor.csv' , head = T , sep = ",")
 # **Benthic communities**
 ## **Partition of benthic communities**
 
-The outcomes from the k-means clustering, conditional random forest models, and the variable importance from models are slightly different every time when running, so we pre-save the outcomes of the current study and used it here to make sure the results showing here are consistent with the study.
+The outcomes from the k-means clustering, stability of partitions, conditional random forest models, and the variable importance from models are slightly different every time when running, so we pre-save the outcomes of the current study and used it here to make sure the results showing here are consistent with the study.
 
 ```{r eval = TRUE, echo=T, message=F, warning=F}
 #k.means <- NbClust(benthic.fct.hell, diss = NULL, method = "kmeans" ,min.nc=2, max.nc=15, index = "all") # k-means - Appendix C
 
-k.means <- readRDS("Data/k.means.RData") # read the outcome in the current study  
+k.means <- readRDS("Data/k.means.RData") # read the outcome of the current study  
 ```
 
 
 ## **Stability of community delineation**
 ```{r eval = TRUE, echo=T, message=F, warning=F}
-set.seed(1)
-stability1 <- stability(benthic.fct.hell, 5, B = 20, r = 5, scheme_2 = T) # estimate k-means partition stability with bootstrapping 
+#set.seed(1)
+#stability1 <- stability(benthic.fct.hell, 5, B = 20, r = 5, scheme_2 = T) # estimate k-means partition stability with bootstrapping 
+
+stability1 <- readRDS('Data/stability1.RData') # read the outcome of the current study  
+
 cluster.stability1 <- data.frame(rownames(benthic.fct.hell), stability1$obs_wise)  # save the stability information
 colnames(cluster.stability1) <- c('transect','stability') # rename the column name of the stability information matrix
 cluster.stability1[,2] <- round(cluster.stability1[,2],2) # show the value of stability until two decimal places
@@ -242,7 +245,7 @@ c.forest.benthic.env <- data.frame(env.tran.all, BC) # combine the matrix of env
 #                            Population_density_log + Tourist_visitors_log + Management_status , 
 #                          data = c.forest.benthic.env, 
 #                          controls = cforest_unbiased(mtry = 5, ntree = 2000)) # add management later on
-c.rf.near.tran <- readRDS('Data/c.rf.near.tran.BC.RData')
+c.rf.near.tran <- readRDS('Data/c.rf.near.tran.BC.RData') # read the outcome of the current study  
 ```
 
 
@@ -250,7 +253,7 @@ c.rf.near.tran <- readRDS('Data/c.rf.near.tran.BC.RData')
 
 ```{r eval = TRUE, echo=T, message=F, warning=F}
 #c.importance <- varimp(c.rf.near.tran, conditional = T) # variable importance
-c.importance <- readRDS('Data/c.importance.test.RData')
+c.importance <- readRDS('Data/c.importance.test.RData') # read the outcome of the current study  
 imp.mean <-mean(c.importance)
 par(mar = c(5,18.5, 4.1, 2.1))
 barplot(main = 'General CRF', sort(c.importance)[10:21],horiz = T,las=1, xlim = c(0,0.02),cex.main=1, cex.lab=1.5,
@@ -261,9 +264,9 @@ abline(v = imp.mean ,col="red4",lty=2) # Appendix I
 **Model accuracy - Appendix H**
 
 ```{r eval = TRUE, echo=T, message=F, warning=F}
-pred.c.rf.tran.oob <- predict(c.rf.near.tran, OOB = TRUE) # calculate the predict values using general CRF 
+pred.c.rf.tran.oob <- predict(c.rf.near.tran, OOB = TRUE) #  the predict values of general CRF 
 pred.sum <- sum(table(pred.c.rf.tran.oob, c.forest.benthic.env$BC)) # check if the prediction fits the observation
-pred.err.OOB <- (8+7+3+13+22+5+15+22+1+4+1+8)/ pred.sum # calculate out-of-bag error of general CRF
+pred.err.OOB <- (8+7+3+13+22+5+15+22+1+4+1+8)/ pred.sum #  out-of-bag error of general CRF
 pred.err.OOB
 ```
 
@@ -285,13 +288,13 @@ c.df.near.tran.BC1 <- data.frame(env.tran.all,BC1)
 #                                Population_density_log + Tourist_visitors_log + Management_status ,
 #                               data = c.df.near.tran.BC1,
 #                               controls = cforest_unbiased(mtry = 5, ntree = 2000)) # build the random forest model
-c.rf.near.tran.BC1 <- readRDS('Data/c.rf.near.tran.BC1.RData')
+c.rf.near.tran.BC1 <- readRDS('Data/c.rf.near.tran.BC1.RData') # read the outcome of the current study  
 ```
 
 **Variable importance**
 ```{r eval = TRUE, echo=T, message=F, warning=F}
 #c.importance.BC1 <- varimp(c.rf.near.tran.BC1, conditional = T)
-c.importance.BC1 <- readRDS('Data/c.importance.BC1.RData')
+c.importance.BC1 <- readRDS('Data/c.importance.BC1.RData') # read the outcome of the current study  
 imp.mean.BC1 <- mean(c.importance.BC1)
 par(mar = c(5.1,18.5, 4.1, 2.1))
 barplot(main = 'Community 1', sort(c.importance.BC1)[10:21],horiz = T,las=1, xlim = c(0,0.025),
@@ -302,15 +305,16 @@ abline(v = imp.mean.BC1 ,col="red4",lty=2)
 **Model accuracy - Appendix H**
 ```{r eval = TRUE, echo=T, message=F, warning=F}
 pred.c.rf.tran.oob.BC1 <- predict(c.rf.near.tran.BC1, OOB = TRUE) #get predicted (fitted) values
-resid.BC1 <- pred.c.rf.tran.oob.BC1- c.df.near.tran.BC1$BC1
+resid.BC1 <- c.df.near.tran.BC1$BC1 -pred.c.rf.tran.oob.BC1
 mse.BC1 <- mean(resid.BC1^2)
+mse.BC1 # mean square error of the model
 var.exp.BC1 <- 1 - sum((resid.BC1)^2)/sum((c.df.near.tran.BC1$BC1-mean(c.df.near.tran.BC1$BC1))^2)
-var.exp.BC1
+var.exp.BC1 # variance explained of the model
 ```
 
 **Partial dependence plots for each environmental factor - Appendix J**
 ```{r eval = TRUE, echo=T, message=F, warning=F}
-load("Data/c.rf.BC1.partial.RData")
+load("Data/c.rf.BC1.partial.RData") # read the outcome of the current study  
 par(mfrow=c(6, 4), mar = c(4, 2, 1, 2))
 plot(c.rf.BC1.light, type = 'l', xlab = 'Light intensity')
 plot(c.rf.BC1.Typhoon_frequency, type = 'l', xlab = 'Typhoon frequency')
@@ -353,20 +357,19 @@ c.df.near.tran.BC2 <- data.frame(env.tran.all,BC2)
 #                                Population_density_log + Tourist_visitors_log + Management_status ,
 #                               data = c.df.near.tran.BC2,
 #                               controls = cforest_unbiased(mtry = 5, ntree = 2000)) # build the random forest model
-c.rf.near.tran.BC2 <- readRDS('Data/c.rf.near.tran.BC2.RData')
+c.rf.near.tran.BC2 <- readRDS('Data/c.rf.near.tran.BC2.RData') # read the outcome of the current study  
 ```
 
 
 **Variable importance**
 ```{r eval = TRUE, echo=T, message=F, warning=F}
 #c.importance.BC2 <- varimp(c.rf.near.tran.BC2, conditional = T)
-c.importance.BC2 <- readRDS('Data/c.importance.BC2.RData')
+c.importance.BC2 <- readRDS('Data/c.importance.BC2.RData') # read the outcome of the current study  
 imp.mean.BC2 <-mean(c.importance.BC2)
 par(mar = c(5.1,18.5, 4.1, 2.1))
 barplot(main = 'Community 2', sort(c.importance.BC2)[10:21],horiz = T,las=1, xlim = c(0,0.005),cex.main=1,
         col='#99CCFF', alpha = 0.5, xlab="Mean decrease in accuracy",cex.lab=1.5)
 abline(v = imp.mean.BC2,col="red4",lty=2)
-
 ```
 
 **Model accuracy - Appendix H**
@@ -374,13 +377,14 @@ abline(v = imp.mean.BC2,col="red4",lty=2)
 pred.c.rf.tran.oob.BC2 <- predict(c.rf.near.tran.BC2, OOB = TRUE) #get predicted (fitted) values
 resid.BC2 <- pred.c.rf.tran.oob.BC2- c.df.near.tran.BC2$BC2
 mse.BC2 <- mean(resid.BC2^2)
+mse.BC2 # mean square error of the model
 var.exp.BC2 <- 1 - sum((resid.BC2)^2)/sum((c.df.near.tran.BC2$BC2-mean(c.df.near.tran.BC2$BC2))^2)
-var.exp.BC2
+var.exp.BC2 # variance explained of the model
 ```
 
 **Partial dependence plots for each environmental factor - Appendix J**
 ```{r eval = TRUE, echo=T, message=F, warning=F}
-load("Data/c.rf.BC2.partial.RData")
+load("Data/c.rf.BC2.partial.RData") # read the outcome of the current study  
 par(mfrow=c(6,4), mar = c(4,2, 1, 2))
 plot(c.rf.BC2.Nitrite, type = 'l', xlab = 'Nitrite')
 plot(c.rf.BC2.light, type = 'l', xlab = 'Light intensity')
@@ -422,13 +426,13 @@ c.df.near.tran.BC3 <- data.frame(env.tran.all,BC3)
 #                                Population_density_log + Tourist_visitors_log + Management_status ,
 #                              data = c.df.near.tran.BC3,
 #                              controls = cforest_unbiased(mtry = 5, ntree = 2000)) # build the random forest model
-c.rf.near.tran.BC3 <- readRDS('Data/c.rf.near.tran.BC3.RData')
+c.rf.near.tran.BC3 <- readRDS('Data/c.rf.near.tran.BC3.RData') # read the outcome of the current study  
 ```
 
 **Variable importance**
 ```{r eval = TRUE, echo=T, message=F, warning=F}
 #c.importance.BC3 <- varimp(c.rf.near.tran.BC3, conditional = T)
-c.importance.BC3 <- readRDS('Data/c.importance.BC3.RData')
+c.importance.BC3 <- readRDS('Data/c.importance.BC3.RData') # read the outcome of the current study  
 imp.mean.BC3 <-mean(c.importance.BC3)
 par(mar = c(5.1,18.5, 4.1, 2.1))
 barplot(main = 'Community 3', sort(c.importance.BC3)[10:21],horiz = T,las=1, xlim = c(0,0.006),cex.main=1,
@@ -441,13 +445,14 @@ abline(v = imp.mean.BC3,col="red4",lty=2)
 pred.c.rf.tran.oob.BC3 <- predict(c.rf.near.tran.BC3, OOB = TRUE) #get predicted (fitted) values
 resid.BC3 <- pred.c.rf.tran.oob.BC3- c.df.near.tran.BC3$BC3
 mse.BC3 <-mean(resid.BC3^2)
+mse.BC3 # mean square error of the model
 var.exp.BC3 <- 1 - sum((resid.BC3)^2)/sum((c.df.near.tran.BC3$BC3-mean(c.df.near.tran.BC3$BC3))^2)
-var.exp.BC3
+var.exp.BC3 # variance explained of the model
 ```
 
 **Partial dependence plots for each environmental factor - Appendix J**
 ```{r eval = TRUE, echo=T, message=F, warning=F}
-load("Data/c.rf.BC3.partial.RData")
+load("Data/c.rf.BC3.partial.RData") # read the outcome of the current study  
 par(mfrow=c(6,4), mar = c(4,2, 1, 2))
 plot(c.rf.BC3.Unstable_substrate_cover, type = 'l', xlab = 'Unstable substrate cover')
 plot(c.rf.BC3.light, type = 'l', xlab = 'Light intensity')
@@ -477,7 +482,7 @@ plot(c.rf.BC3.DHW_recovery, type = 'l', xlab = 'DHW recovery')
 c.df.near.tran.BC4 <- data.frame(env.tran.all,BC4)
 
 # don't run since it takes for a while
-#c.rf.BC4.mintree <- cforest.best.mtree(c.df.near.tran.BC2,5,20,3500) # MSEs become stable when mtree > 1000, so setup mtree = 2000
+#c.rf.BC4.mintree <- cforest.best.mtree(c.df.near.tran.BC2,5,20,3500) # MSEs become stable when mtree > 1000, so setup mtree = 2500
 
 #c.rf.near.tran.BC4 <- cforest(BC4 ~ Mean_SST + SD_SST + 
 #                                Light_intensity + Wave_exposure_log + Wave_height + 
@@ -488,14 +493,14 @@ c.df.near.tran.BC4 <- data.frame(env.tran.all,BC4)
 #                                Anthropogenic_land_use_log + Forest_land_use_log +
 #                                Population_density_log + Tourist_visitors_log + Management_status ,
 #                              data = c.df.near.tran.BC4,
-#                              controls = cforest_unbiased(mtry = 5, ntree = 2000)) # build the random forest model
-c.rf.near.tran.BC4 <- readRDS('Data/c.rf.near.tran.BC4.RData')
+#                              controls = cforest_unbiased(mtry = 5, ntree = 2500)) # build the random forest model
+c.rf.near.tran.BC4 <- readRDS('Data/c.rf.near.tran.BC4.RData') # read the outcome of the current study  
 ```
 
 **Variable importance**
 ```{r eval = TRUE, echo=T, message=F, warning=F}
 #c.importance.BC4 <- varimp(c.rf.near.tran.BC4, conditional = T)
-c.importance.BC4 <- readRDS('Data/c.importance.BC4.RData')
+c.importance.BC4 <- readRDS('Data/c.importance.BC4.RData') # read the outcome of the current study  
 imp.mean.BC4 <- mean(c.importance.BC4)
 par(mar = c(5.1,18.5, 4.1, 2.1))
 barplot(main = 'Community 4', sort(c.importance.BC4)[10:21],horiz = T,las=1, xlim = c(0,0.005),cex.main=1,
@@ -508,13 +513,14 @@ abline(v = imp.mean.BC4 ,col="red4",lty=2)
 pred.c.rf.tran.oob.BC4 <- predict(c.rf.near.tran.BC4, OOB = TRUE) #get predicted (fitted) values
 resid.BC4 <- pred.c.rf.tran.oob.BC4- c.df.near.tran.BC4$BC4
 mse.BC4 <- mean(resid.BC4^2)
+mse.BC4 # mean square error of the model
 var.exp.BC4 <- 1 - sum((resid.BC4)^2)/sum((c.df.near.tran.BC4$BC4-mean(c.df.near.tran.BC4$BC4))^2)
-var.exp.BC4
+var.exp.BC4 # variance explained of the model
 ```
 
 **Partial dependence plots for each environmental factor - Appendix J**
 ```{r eval = TRUE, echo=T, message=F, warning=F}
-load("Data/c.rf.BC4.partial.RData")
+load("Data/c.rf.BC4.partial.RData") # read the outcome of the current study  
 par(mfrow=c(6,4), mar = c(4,2, 1, 2))
 plot(c.rf.BC4.SD_chl_a, type = 'l', xlab = 'SD chl a')
 plot(c.rf.BC4.Population_density_log, type = 'l', xlab = 'Population density')
@@ -544,7 +550,7 @@ plot(c.rf.BC4.Typhoon_frequency, type = 'l', xlab = 'Typhoon frequency')
 c.df.near.tran.BC5 <- data.frame(env.tran.all,BC5)
 
 # don't run since it takes for a while
-#c.rf.BC5.mintree <- cforest.best.mtree(c.df.near.tran.BC5,5,20,3500)  # MSEs become stable when mtree > 1000, so setup mtree = 2000
+#c.rf.BC5.mintree <- cforest.best.mtree(c.df.near.tran.BC5,5,20,3500)  # MSEs become stable when mtree > 1000, so setup mtree = 2500
 
 #c.rf.near.tran.BC5 <- cforest(BC5 ~ Mean_SST + SD_SST + 
 #                                Light_intensity + Wave_exposure_log + Wave_height + 
@@ -556,13 +562,13 @@ c.df.near.tran.BC5 <- data.frame(env.tran.all,BC5)
 #                                Population_density_log + Tourist_visitors_log + Management_status ,
 #                              data = c.df.near.tran.BC5,
 #                              controls = cforest_unbiased(mtry = 5, ntree = 2500)) # build the random forest model
-c.rf.near.tran.BC5 <- readRDS('Data/c.rf.near.tran.BC5.RData')
+c.rf.near.tran.BC5 <- readRDS('Data/c.rf.near.tran.BC5.RData') # read the outcome of the current study  
 ```
 
 **Variable importance**
 ```{r eval = TRUE, echo=T, message=F, warning=F}
 #c.importance.BC5 <- varimp(c.rf.near.tran.BC5, conditional = T)
-c.importance.BC5 <- readRDS('Data/c.importance.BC5.RData')
+c.importance.BC5 <- readRDS('Data/c.importance.BC5.RData') # read the outcome of the current study  
 imp.mean.BC5 <- mean(c.importance.BC5)
 par(mar = c(5.1,18.5, 4.1, 2.1))
 barplot(main = 'Community 5', sort(c.importance.BC5)[10:21],horiz = T,las=1, xlim = c(0,0.02),cex.main=1,
@@ -575,13 +581,14 @@ abline(v = imp.mean.BC5 ,col="red4",lty=2)
 pred.c.rf.tran.oob.BC5 <- predict(c.rf.near.tran.BC5, OOB = TRUE) #get predicted (fitted) values
 resid.BC5 <- pred.c.rf.tran.oob.BC5- c.df.near.tran.BC5$BC5
 mse.BC5 <- mean(resid.BC5^2)
+mse.BC5 # mean square error of the model
 var.exp.BC5 <- 1 - sum((resid.BC5)^2)/sum((c.df.near.tran.BC5$BC5-mean(c.df.near.tran.BC5$BC5))^2)
-var.exp.BC5
+var.exp.BC5 # variance explained of the model
 ```
 
 **Partial dependence plots for each environmental factor - Appendix J**
 ```{r eval = TRUE, echo=T, message=F, warning=F}
-load("Data/c.rf.BC5.partial.RData")
+load("Data/c.rf.BC5.partial.RData") # read the outcome of the current study  
 par(mfrow=c(6,4), mar = c(4,2, 1, 2))
 plot(c.rf.BC5.Typhoon_recovery, type = 'l', xlab = 'Typhoon recovery')
 plot(c.rf.BC5.Typhoon_frequency, type = 'l', xlab = 'Typhoon frequency')
@@ -610,7 +617,7 @@ plot(c.rf.BC5.Unstable_substrate_cover, type = 'l', xlab = 'Unstable substrate c
 ## **Figure 1a**
 ```{r eval = TRUE, echo=T, message=F, warning=F}
 taiwan <- readOGR('Data/Linetal_dataset_TW.shp') # import map data
-taiwan_map <- fortify(taiwan)  # change .shp file into dataframe
+taiwan_map <- fortify(taiwan)  # convert .shp file into dataframe
 
 ggplot() +
   geom_hline(yintercept = 23.5,linetype=5,col='black',alpha=.3)+
@@ -621,7 +628,7 @@ ggplot() +
   scale_x_continuous(limits = c(116.2, 123)) +                                                          
   scale_y_continuous(limits = c(20.5, 25.5)) +
   annotate("text", x = 120.8, y = 23.6, label = "Taiwan", size=8) +
-  theme_minimal() +                                                                                                                                                          # delete legend
+  theme_minimal() +                                             
   theme(legend.position="none", panel.background = element_rect(fill = 'aliceblue'))+
   coord_map(projection ="mollweide")
 ```
@@ -629,7 +636,7 @@ ggplot() +
 ## **Figure 1b**
 ```{r eval = TRUE, echo=T, message=F, warning=F}
 col <- c('#FF66FF','#99CCFF','grey','#B8E186','#FFED6F')
-ggplot(coord.df, aes(x = 1, y= site)) +   # plot distribution of BCs
+ggplot(coord.df, aes(x = 1, y= site)) +  
   geom_scatterpie(aes(x=x, y=y, r=.5), data=coord.df,cols=c('X1','X2','X3','X4','X5')) +
   geom_hline(yintercept = 40.5,linetype=5,col='black',alpha=.8)+
   scale_fill_manual(values = col)+

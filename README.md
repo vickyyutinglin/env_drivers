@@ -55,7 +55,7 @@ Lin YT, Château P-A, Nozawa Y, Wei C-L, Wunderlich RF, Denis V (2023), Data fro
 
 1. **Description of dataset**
 
-These data were generated to identify distinct benthic communities around Taiwan and the important environmental drivers causing the difference.
+These data were used to identify distinct benthic communities around Taiwan and the important environmental drivers causing the difference.
 
 2. **File List**
 
@@ -149,3 +149,91 @@ A detailed description of data acquisition and processing can be found in the pu
       + zo: zoanthid
 
 
+##### **Linetal_dataset_Env.csv**
+
+1. Number of variables/columns: 26
+
+2. Number of cases/rows: 434
+
+3. Missing data codes
+
+    None
+
+4. Variable List
+
+    + Column A - Region
+    + Column B - Site
+    + Column C - Depth
+    + Column D - Latitude
+    + Column E – Longitude
+    + Column F – Mean_SST
+    + Column G – SD_SST
+    + Column H – Light_intensity
+    + Column I – Wave_exposure
+    + Column J – Wave_height
+    + Column K – Mean_chl_a
+    + Column L – SD_chl_a
+    + Column M – Nitrate
+    + Column N – Nitrite
+    + Column O – Phosphate
+    + Column P – DHW
+    + Column Q – DHW_recovery
+    + Column R – Typhoon_disturbance
+    + Column S – Typhoon_recovery
+    + Column T – Typhoon_frequency
+    + Column U – Anthropogenic_land_use
+    + Column V – Forest_land_use
+    + Column W – Population_density
+    + Column X – Tourist_visitors
+    + Column Y – Unstable_substrate_cover
+    + Column Z – Management_status
+
+
+5. Abbreviations used
+  
+    + for major benthic categories: 
+      + SST: sea surface temperature
+      + SD: standard deviation
+      + DHW: degree heating week
+
+
+
+##### **Linetal_dataset_Cor.csv**
+
+1. Number of variables/columns: 14
+
+2. Number of cases/rows: 88
+
+3. Missing data codes
+
+    None
+
+4. Variable List
+
+    + Column A - Region
+    + Column B - Site
+    + Column C - Depth
+    + Column D - Latitude
+    + Column E – Longitude
+    + Column F – 1
+    + Column G – 2
+    + Column H – 3
+    + Column I – 4
+    + Column J – 5
+    + Column K – y
+    + Column L – x
+    + Column M – Label1
+    + Column N – Label2
+
+5. Abbreviations used
+  
+    + for variables: 
+      + 1: Community 1
+      + 2: Community 2
+      + 3: Community 3
+      + 4: Community 4
+      + 5: Community 5
+      + y: the vertical position of the pie chart
+      + x: the horizental position of the pie chart
+      + Label1: the number of sampling locations used in Figure 1a
+      + Label2: the number of sampling locations used in Figure 1b
