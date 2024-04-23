@@ -3,11 +3,11 @@
 &nbsp; &nbsp; &nbsp; &nbsp;
 </p>
 
-# Data from: Environmental drivers of coastal benthic communities in a complex environmental setting
+# Data from: Environmental influence on coastal benthic communities in a complex setting
 
 ---
 
-This Linetal_submitted_dataset_README.txt file was generated on 2023-09-25 by Yuting Vicky Lin (vicky.linyuting@gmail.com). Knit [Lin_et_al_STOTEN.Rmd](Lin_et_al_STOTEN.Rmd) to generate html and extract R code.
+This Linetal_submitted_dataset_README.txt file was generated on 2024-04-23 by Yuting Vicky Lin (vicky.linyuting@gmail.com). Knit [Lin_et_al_MPB.Rmd](Lin_et_al_MPB.Rmd) to generate html and extract R code.
 
 
 1. **Author Information**
@@ -30,12 +30,13 @@ This Linetal_submitted_dataset_README.txt file was generated on 2023-09-25 by Yu
 			
 	Fifth author 
 		Name: Dr. Rainer Ferdinand Wunderlich
-		Institution: Department of Bioenvironmental Systems Engineering, National Taiwan University, Taipei 10617, Taiwan
+		Institution: Department of Bioenvironmental Systems Engineering, National Taiwan University, Taipei 10617, Taiwan &
+                             5INRAE, UR EABX, 33612 Cestas, France
 
 	Sixth & corresponding author 
 		Name: Dr Vianney Denis
 		Institution: Institute of Oceanography, National Taiwan University, Taipei 10617, Taiwan
-		Email: vianney.denis@gmail.com
+		Email: vianneydenis@ntu.edu.tw
 
 2. **Date of data collection**: 2016-2020
 
@@ -44,9 +45,9 @@ This Linetal_submitted_dataset_README.txt file was generated on 2023-09-25 by Yu
 4. **Funding sources that supported the collection of the data**: Marine National Park of Taiwan, National Science and Technology Council of Taiwan, Ocean Affairs Council of Taiwan 
 
 5. **Recommended citation for this dataset**
-Lin YT, Château P-A, Nozawa Y, Wei C-L, Wunderlich RF, Denis V (2023), Data from: Environmental drivers of coastal benthic communities in a complex environmental setting, Dryad, Dataset, https://doi.org/????
+Lin YT, Château P-A, Nozawa Y, Wei C-L, Wunderlich RF, Denis V (2023), Data from: Environmental influence on coastal benthic communities in a complex setting, Dryad, Dataset, https://doi.org/????
 
-[Data and R script are also available through the GitHub repository https://github.com/vianneydenis/XXXXXX in order to replicate our analyses]
+[Data and R script are also available through the GitHub repository https://github.com/NTU-FRELab/drivers-communities in order to replicate our analyses]
 
 
 ## DESCRIPTION OF THE DATA AND FILE STRUCTURE
