@@ -12,31 +12,31 @@ This Linetal_submitted_dataset_README.txt file was generated on 2024-04-23 by Yu
 
 1. **Author Information**
 
-	First author
-		Name: Yuting Vicky Lin
-		Institution: Institute of Oceanography, National Taiwan University, Taipei 10617, Taiwan
+	+ First author
+		+ Name: Yuting Vicky Lin
+		+ Institution: Institute of Oceanography, National Taiwan University, Taipei 10617, Taiwan
 
-	Second author
-		Name: Dr. Pierre-Alexandre Château
-		Institution: Department of Marine Environment and Engineering, National Sun Yat-Sen University, Kaohsiung 80420, Taiwan 
+	+ Second author
+		+ Name: Dr. Pierre-Alexandre Château
+		+ Institution: Department of Marine Environment and Engineering, National Sun Yat-Sen University, Kaohsiung 80420, Taiwan 
  		
-	Third author 
-		Name: Dr. Yoko Nozawa
-		Institution: Tropical Biosphere Research Center, University of the Ryukyus, Okinawa 905-0227, Japan 
+	+ Third author 
+		+ Name: Dr. Yoko Nozawa
+		+ Institution: Tropical Biosphere Research Center, University of the Ryukyus, Okinawa 905-0227, Japan 
 		
-	Fourth author 
-		Name: Dr. Chih-Lin Wei
-		Institution: Institute of Oceanography, National Taiwan University, Taipei 10617, Taiwan
+	+ Fourth author 
+		+ Name: Dr. Chih-Lin Wei
+		+ Institution: Institute of Oceanography, National Taiwan University, Taipei 10617, Taiwan
 			
-	Fifth author 
-		Name: Dr. Rainer Ferdinand Wunderlich
-		Institution: Department of Bioenvironmental Systems Engineering, National Taiwan University, Taipei 10617, Taiwan &
+	+ Fifth author 
+		+ Name: Dr. Rainer Ferdinand Wunderlich
+		+ Institution: Department of Bioenvironmental Systems Engineering, National Taiwan University, Taipei 10617, Taiwan &
                              5INRAE, UR EABX, 33612 Cestas, France
 
-	Sixth & corresponding author 
-		Name: Dr Vianney Denis
-		Institution: Institute of Oceanography, National Taiwan University, Taipei 10617, Taiwan
-		Email: vianneydenis@ntu.edu.tw
+	+ Sixth & corresponding author 
+		+ Name: Dr. Vianney Denis
+		+ Institution: Institute of Oceanography, National Taiwan University, Taipei 10617, Taiwan
+		+ Email: vianneydenis@ntu.edu.tw
 
 2. **Date of data collection**: 2016-2020
 
@@ -56,33 +56,33 @@ Lin YT, Château P-A, Nozawa Y, Wei C-L, Wunderlich RF, Denis V (2023), Data fro
 
 1. **Description of dataset**
 
-These data were used to identify distinct benthic communities around Taiwan and the important environmental drivers causing the difference.
+    These data were used to identify distinct benthic communities around Taiwan and the important environmental drivers causing the difference.
 
 2. **File List**
 
-   File 1: Linetal_dataset_Benthic.csv
-   File 1 description: benthic cover estimates of the 433 sampling transects
+   + File 1: Linetal_dataset_Benthic.csv
+       + File 1 description: benthic cover estimates of the 433 sampling transects
 
-   File 2: Linetal_dataset_Env.csv
-   File 2 description: data of 21 environmental drviers in the 433 sampling transects
+   + File 2: Linetal_dataset_Env.csv
+       + File 2 description: data of 21 environmental drviers in the 433 sampling transects
 
-   File 3: Linetal_dataset_Cor.csv
-   File 3 description: coordination and benthic information used to generate Figure 1b 
+   + File 3: Linetal_dataset_Cor.csv
+       + File 3 description: coordination and benthic information used to generate Figure 1b 
 
-   File 4: Linetal_dataset_TW.shp
-   File 4 description: file of Taiwan map used to generate Figure 1a
+   + File 4: Linetal_dataset_TW.shp
+       + File 4 description: file of Taiwan map used to generate Figure 1a
 
-   File 5: Linetal_dataset_TW.cpg
-   File 5 description: file of Taiwan map used to generate Figure 1a
+   + File 5: Linetal_dataset_TW.cpg
+       + File 5 description: file of Taiwan map used to generate Figure 1a
 
-   File 6: Linetal_dataset_TW.dbf
-   File 6 description: file of Taiwan map used to generate Figure 1a
+   + File 6: Linetal_dataset_TW.dbf
+       + File 6 description: file of Taiwan map used to generate Figure 1a
 
-   File 7: Linetal_dataset_TW.prj
-   File 7 description: file of Taiwan map used to generate Figure 1a
+   + File 7: Linetal_dataset_TW.prj
+       + File 7 description: file of Taiwan map used to generate Figure 1a
 
-   File 8: Linetal_dataset_TW.shx
-   File 8 description: file of Taiwan map used to generate Figure 1a
+   + File 8: Linetal_dataset_TW.shx
+       + File 8 description: file of Taiwan map used to generate Figure 1a
 
 
 ### METHODOLOGICAL INFORMATION
@@ -229,11 +229,11 @@ A detailed description of data acquisition and processing can be found in the pu
 5. Abbreviations used
   
     + for variables: 
-      + 1: Community 1
-      + 2: Community 2
-      + 3: Community 3
-      + 4: Community 4
-      + 5: Community 5
+      + 1: CCA Community 
+      + 2: Turf & Stony Cooral Community
+      + 3: Turf Community
+      + 4: Digitate Community
+      + 5: Bushy Community
       + y: the vertical position of the pie chart
       + x: the horizental position of the pie chart
       + Label1: the number of sampling locations used in Figure 1a
