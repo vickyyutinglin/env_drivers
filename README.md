@@ -7,7 +7,7 @@
 
 ---
 
-This Linetal_submitted_dataset_README.txt file was generated on 2024-04-23 by Yuting Vicky Lin (vicky.linyuting@gmail.com). Knit [Lin_et_al_MPB.Rmd](Lin_et_al_MPB.Rmd) to generate html and extract R code.
+This README.md was generated on 2024-04-23 by Yuting Vicky Lin (vicky.linyuting@gmail.com). Knit [Lin_et_al_MPB.Rmd](Lin_et_al_MPB.Rmd) to generate html and extract R code.
 
 
 1. **Author Information**
@@ -45,7 +45,7 @@ This Linetal_submitted_dataset_README.txt file was generated on 2024-04-23 by Yu
 4. **Funding sources that supported the collection of the data**: Marine National Park of Taiwan, National Science and Technology Council of Taiwan, Ocean Affairs Council of Taiwan 
 
 5. **Recommended citation for this dataset**
-Lin YT, Château P-A, Nozawa Y, Wei C-L, Wunderlich RF, Denis V (2023), Data from: Environmental influence on coastal benthic communities in a complex setting, Dryad, Dataset, https://doi.org/????
+Lin YT, Château P-A, Nozawa Y, Wei C-L, Wunderlich RF, Denis V (2024), Data from: Environmental influence on coastal benthic communities in a complex setting, Dryad, Dataset, https://doi.org/10.5061/dryad.j0zpc86nz
 
 [Data and R script are also available through the GitHub repository https://github.com/NTU-FRELab/drivers-communities in order to replicate our analyses]
 
